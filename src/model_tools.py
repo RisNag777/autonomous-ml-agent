@@ -1,5 +1,6 @@
-from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
 
 
 def train_baseline_model(df, target_column):
@@ -11,5 +12,9 @@ def train_baseline_model(df, target_column):
     )
     model = LogisticRegression(max_iter=1000, class_weight="balanced")
 
-    model.fit(X_train, y_train)
-    return model, X_val, y_val
+    scaler = StandardScaler()
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_val_scaled = scaler.fit_transform(X_val)
+
+    model.fit(X_train_scaled, y_train)
+    return model, X_val_scaled, y_val
