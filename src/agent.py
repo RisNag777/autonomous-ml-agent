@@ -5,6 +5,8 @@ from src.report_tools import save_artifacts
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 
+import time
+
 
 class AgentState:
     def __init__(self):
@@ -19,6 +21,8 @@ class AgentState:
         self.no_improvement_count = 0
         self.stop_reason = None
         self.decisions = []
+        self.start_time = time.time()
+        self.time_budget_seconds = 120
 
 
 def run_iteration(state, df, model_type="logistic"):
