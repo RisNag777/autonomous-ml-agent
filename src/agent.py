@@ -5,8 +5,6 @@ from src.report_tools import save_artifacts
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 
-import time
-
 
 class AgentState:
     def __init__(self):
@@ -21,12 +19,6 @@ class AgentState:
         self.no_improvement_count = 0
         self.stop_reason = None
         self.decisions = []
-        self.start_time = time.time()
-        self.time_budget_seconds = 120
-
-
-def out_of_time(state):
-    return (time.time() - state.start_time) > state.time_budget_seconds
 
 
 def run_iteration(state, df, model_type="logistic"):
@@ -97,9 +89,6 @@ def check_stop(state, max_iterations=3, min_improvement=0.01):
     # Always allow at least 2 iterations
     if state.iteration < 2:
         return False
-    if out_of_time(state):
-        state.stop_reason = "Time budget exceeded"
-        return True
     if state.iteration >= max_iterations:
         state.stop_reason = "Max iterations reached"
         return True

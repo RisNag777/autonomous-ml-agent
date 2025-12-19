@@ -1,7 +1,6 @@
 from sklearn.metrics import (
     confusion_matrix,
     f1_score,
-    recall_score,
     roc_auc_score,
 )
 
@@ -15,7 +14,6 @@ def evaluate_classification_model(model, X_val, y_val):
     metrics = {
         "roc_auc": roc_auc_score(y_val, y_probs),
         "f1": f1_score(y_val, y_preds),
-        "recall": recall_score(y_val, y_preds),
         "confusion_matrix": confusion_matrix(y_val, y_preds).tolist(),
         "positive_rate": float(np.mean(y_val)),
     }
