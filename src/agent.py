@@ -97,6 +97,9 @@ def check_stop(state, max_iterations=3, min_improvement=0.01):
     # Always allow at least 2 iterations
     if state.iteration < 2:
         return False
+    if out_of_time(state):
+        state.stop_reason = "Time budget exceeded"
+        return True
     if state.iteration >= max_iterations:
         state.stop_reason = "Max iterations reached"
         return True
