@@ -45,3 +45,11 @@ def build_llm_prompt(agent_summary):
 
     Write clearly, concisely and professionally
     """
+
+
+def generate_agent_report(llm_client, prompt):
+    """
+    llm_client is a callable that takes a prompt and returns text.
+    This keeps the agent LLM-agnostic
+    """
+    return llm_client(prompt)
