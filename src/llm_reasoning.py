@@ -16,9 +16,6 @@ def build_agent_summary(state):
             f"Iteration {d['iteration']}: "
             f"Model = {d['model']}, "
             f"ROC_AUC = {d['roc_auc']:.4f}, "
-            f"F1 = {d['f1']:.4f}, "
-            f"Recall = {d['recall']:.4f}, "
-            f"Train Time = {d['train_time_sec']}s"
         )
 
     summary.append("\nFINAL DECISION:")
