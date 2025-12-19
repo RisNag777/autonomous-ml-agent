@@ -53,3 +53,14 @@ def generate_agent_report(llm_client, prompt):
     This keeps the agent LLM-agnostic
     """
     return llm_client(prompt)
+
+
+def dummy_llm(prompt):
+    return (
+        "The agent correctly identified a highly imbalanced "
+        "classification problem. A logistic regression baseline achieved "
+        "strong ROC AUC but poor recall, triggering escalation to a more "
+        "expressive model. The agent stopped after marginal gains were "
+        "observed. Future improvements include threshold tuning, feature "
+        "engineering, and cost-sensitive optimization."
+    )
