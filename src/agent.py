@@ -81,6 +81,10 @@ def run_iteration(state, df, model_type="logistic"):
 
 def check_stop(state, max_iterations=3, min_improvement=0.01):
     """Determine if agent should stop iterating"""
+
+    # Always allow at least 2 iterations
+    if state.iteration < 2:
+        return False
     if state.iteration >= max_iterations:
         state.stop_reason = "Max iterations reached"
         return True
