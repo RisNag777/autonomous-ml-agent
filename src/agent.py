@@ -35,7 +35,11 @@ def run_iteration(state, df, model_type="logistic"):
             X, y, test_size=0.2, stratify=y, random_state=42
         )
         model = RandomForestClassifier(
-            n_estimators=200, class_weight="balanced", random_state=42
+            n_estimators=50,
+            max_depth=12,
+            class_weight="balanced",
+            n_jobs=-1,
+            random_state=42,
         )
         model.fit(X_train, y_train)
         model_name = "Random Forest"
