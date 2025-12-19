@@ -25,3 +25,23 @@ def build_agent_summary(state):
     summary.append(f" - Stop Reason: {state.stop_reason}")
     summary.append(f" - Best ROC AUC: {state.best_metric:.4f}")
     return "\n".join(summary)
+
+
+def build_llm_prompt(agent_summary):
+    return f"""
+    You are a senior data scientist reviewing the behavior of an autonomous
+    machine learning agent.
+
+    Below is a structured summary of the agent's actions and results.
+
+    Your task:
+    1. Explain what the agent did
+    2. Justify why or why not model escalation occurred
+    3. Explain why the agent stopped
+    4. Provide 2-3 concrete suggestions for improvements
+
+    AGENT SUMMARY:
+    {agent_summary}
+
+    Write clearly, concisely and professionally
+    """
