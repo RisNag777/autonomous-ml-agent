@@ -21,19 +21,6 @@ class AgentState:
         self.decisions = []
 
 
-def run_baseline_agent(state, df):
-    model, X_val, y_val = train_baseline_model(df, state.target_column)
-    metrics = evaluate_classification_model(model, X_val, y_val)
-
-    state.models_tried.append("logistic_regression")
-    state.best_model = model
-    state.best_metric = metrics["roc_auc"]
-    state.iteration += 1
-
-    save_artifacts(model, metrics, state.iteration)
-    return metrics
-
-
 def run_iteration(state, df, model_type="logistic"):
     """Run one iteration of model training and evaluation"""
 
