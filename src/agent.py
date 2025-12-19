@@ -25,6 +25,10 @@ class AgentState:
         self.time_budget_seconds = 120
 
 
+def out_of_time(state):
+    return (time.time() - state.start_time) > state.time_budget_seconds
+
+
 def run_iteration(state, df, model_type="logistic"):
     """Run one iteration of model training and evaluation"""
 
