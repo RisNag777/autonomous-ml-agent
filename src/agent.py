@@ -104,3 +104,31 @@ def check_stop(state, max_iterations=3, min_improvement=0.01):
         state.stop_reason = "Improvement below threshold"
         return True
     return False
+
+
+def run_agent(df, state):
+    """Run the agent until stop conditions are met"""
+
+    # Phase 1: Baseline
+    metrics = run_iteration(state, df, model_type="logistic")
+    print(
+        f"Iteration {state.iteration} - Logistic Regression ROC AUC: "
+        + f"{metrics['roc_auc']:.4f}"
+    )
+
+    while not check_stop(state):
+        # Phase 2: Stronger Model
+        metrics = run_iteration(state, df, model_type="tree")
+        print(
+            f"Iteration {state.iteration} - Random Forest ROC AUC: "
+            + f"{metrics['roc_auc']:.4f}"
+        )
+
+    print(
+        f"Agent stopped after {state.iteration} iterations. Reason: "
+        + f"{state.stop_reason}"
+    )
+    print(
+        f"Best model: {state.models_tried[-1]} with ROC AUC: "
+        + f"{state.best_metric:.4f}"
+    )
